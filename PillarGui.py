@@ -27,7 +27,7 @@ class Pane(object):
         self.screen.blit(self.font.render('Reset', True, (255,0,0)), (240, 310))
         pygame.display.update()
 
-class TowerGUI:   
+class PillarGui:   
     white = (255,255,255)
     black = (0,0,0)
 
@@ -37,7 +37,7 @@ class TowerGUI:
 
     Rect1 = pygame.draw.rect(window, (black), (175, 75, 200, 100), 2)
     Rect2 = pygame.draw.rect(window, (black), (175, 275, 200, 100), 2)
-    def initGUI():
+    def __init__():
         pane = Pane()
         
         pane.addRect()
@@ -46,7 +46,7 @@ class TowerGUI:
         pane.addSecondRect()
         pane.addSecondText()
         
-    def drawGUI():        
+    def draw():        
         # Mouse position and button clicking.
         pos = pygame.mouse.get_pos()
         pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
