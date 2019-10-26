@@ -1,12 +1,14 @@
 import FallingRocks
+import Lava
 import random
 
 # This class is responsible for spawning enemies at random
 class EnemySpawner:
     enemies = []
-    timer = 0
 
-    def __init__(self):
+    def __init__(self, comm, time):
+        self.comm = comm
+        self.time = time
         self.spawnLava()
         return
 
@@ -16,6 +18,8 @@ class EnemySpawner:
         return
 
     def spawnLava(self):
+        lava = Lava.Lava(self.comm, self.time)
+        self.enemies.append(lava)
         return
 
     def spawnBoulder(self):

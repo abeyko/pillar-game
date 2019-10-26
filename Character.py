@@ -37,6 +37,14 @@ class Character:
             self.position[0] += 1
             self.calcStepPosition()
             self.updateTower(self.color)
+            message = "P"
+            if self.position[0] < 10:
+                message += "00"+str(self.position[0])
+            elif self.position[0] < 100:
+                message += "0"+str(self.position[0])
+            else:
+                message += str(self.position[0])
+            self.comm.sendAnything(message)
         elif(self.position[0] == 299):
             self.HasWon = 1
         return
