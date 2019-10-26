@@ -67,7 +67,11 @@ pygame.joystick.init()
 textPrint = TextPrint()
 
 # Game Definitions
-ser = serial.Serial('/dev/ttyACM0', 9600)
+try:
+    ser = serial.Serial('/dev/ttyACM0', 9600)
+except serial.SerialException or OSError:
+    print("Couldn't open tower port")
+    quit()
 flag = 1
 location = '000'
 number = 0
