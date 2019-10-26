@@ -3,6 +3,7 @@ import threading
 import queue
 import time
 import serial
+import win.py
 
 # Define some colors.
 BLACK = pygame.Color('black')
@@ -178,6 +179,8 @@ while not done:
             if player < 300: #300 total LEDs to go up to
                 prev_player = player
                 player += 1
+            elif player == 299
+                player_win()
             move = False
         
         test = joystick.get_axis(0)
