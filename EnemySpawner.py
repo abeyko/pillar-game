@@ -4,16 +4,16 @@ import random
 
 # This class is responsible for spawning enemies at random
 class EnemySpawner:
-    enemies = []
 
     def __init__(self, comm, time):
         self.comm = comm
         self.time = time
+        self.enemies = []
         self.spawnLava()
         return
 
     def spawnRocks(self):
-        rock = FallingRocks.FallingRocks()
+        rock = FallingRocks.FallingRocks(self.comm, self.time)
         self.enemies.append(rock)
         return
 
@@ -30,7 +30,7 @@ class EnemySpawner:
 
     def randomSpawn(self, timer):
         mob = random.randint(0, 2)
-        time = timer-self.timer
+        time = timer-self.time
         if(time > 4000):
             self.timer = timer
             if mob == 0:

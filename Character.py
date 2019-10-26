@@ -101,7 +101,7 @@ class Character:
         return
 
     #give it an array of all the enemies currently on the screen to detect collissions
-    def hasCollided(self, enemies):
+    def collission(self, enemies):
 
         #incriments the amount of invicibility the player has down by one
         if self.isInvincibleTicks > 0:
