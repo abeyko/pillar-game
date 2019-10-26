@@ -128,7 +128,7 @@ class towerComm:
         return
 
     # move the tower counter clockwise one step
-    def forward(self):
+    def reverse(self):
         self.ser.write("Rev\n".encode())
         return
 
