@@ -6,6 +6,8 @@ class Character:
     stepAngle = 0 # the angle of the stepper motor
     lives = 3
     isInvincibleTicks = 0
+    HasWon = 0
+    HasLos = 0
 
     # 4 steps counter clockwise = one LED to the right
     # 23 LEDs and 96 steps clockwise = one revolution
@@ -36,7 +38,7 @@ class Character:
             self.calcStepPosition()
             self.updateTower(self.color)
         elif(self.position[0] == 299):
-            self.comm.sendAnything("Murica")
+            self.HasWon = 1
         return
 
     # move the character to the left one LED

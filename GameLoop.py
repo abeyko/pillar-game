@@ -35,7 +35,17 @@ def loop():
         axis0 = joystick.get_axis(0)
         axis1 = joystick.get_axis(1)
         Player.updatePosition(axis0, axis1)
+
         spawner.randomSpawn(time)
+
+        if (Player.HasWon == 1):
+            self.comm.sendAnything("Murica")
+        return
+        if (Player.HasLos == 1):
+            def draw():
+                self.comm.sendAnything("RED")
+        return
+
         draw()
         clock.tick(5)
 
