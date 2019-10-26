@@ -24,7 +24,7 @@ class Character:
             self.moveUp()
         if (axis1 > 0.5):
             self.moveDown()
-        print(self.position)
+        #print(self.position)
         return
 
     # move the character to the right one led

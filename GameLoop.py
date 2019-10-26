@@ -34,7 +34,7 @@ def loop():
         axis1 = joystick.get_axis(1)
         Player.updatePosition(axis0, axis1)
         draw()
-        clock.tick(20)
+        clock.tick(5)
 
 def draw():
     screen.fill(WHITE)

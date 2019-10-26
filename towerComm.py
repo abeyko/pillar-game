@@ -1,13 +1,12 @@
 import serial
+import time
 class towerComm:
     #PORT = '/dev/ttyACM0'
-    PORT = 'COM6'
+    PORT = 'COM5'
     def __init__(self):
-        try:
-            self.ser = serial.Serial(self.PORT, 115200)
-        except:
-            print("No Connection")
-        return
+        self.ser = serial.Serial(self.PORT, 115200)
+        time.sleep(6)
+        self.sendAnything("Home")
 
     # send anything you want
     def sendAnything(self, message):
@@ -36,39 +35,40 @@ class towerComm:
     # output format "ppp,rrr,ggg,bbb"
     def pos_color_str(self, position, color):
         pos = self.three_digit_str(position)
-        r = self.three_digit_str(color.r)
-        g = self.three_digit_str(color.g)
-        b = self.three_digit_str(color.b)
+        r = self.three_digit_str(color[0])
+        g = self.three_digit_str(color[1])
+        b = self.three_digit_str(color[2])
         num_str = pos + ',' + r + ',' + g + ',' + b
-        return color
+        return num_str
     
     # tells the tower to light up a certain led with a certain color in the lower band
     # the color variable is a tuple like this: (r, g, b)
     def lowerBandLight(self, position, color):
-        string = "Lx"
-        string += pos_color_str(position, color)
+        string = "L"
+        string += self.pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
+        print(string)
         return
 
     # tells the tower to light up a certain led with a certain color in the lower band
     # the color variable is a tuple like this: (r, g, b)
     def middleBandLight(self, position, color):
-        string = "Mx"
-        string += self.three_digit_str(position)
-        string += pos_color_str(position, color)
+        string = "M"
+        string += self.pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
+        print(string)
         return
 
     # tells the tower to light up a certain led with a certain color in the lower band
     # the color variable is a tuple like this: (r, g, b)
     def upperBandLight(self, position, color):
-        string = "Hx"
-        string += self.three_digit_str(position)
-        string += pos_color_str(position, color)
+        string = "H"
+        string += self.pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
+        print(string)
         return
 
     # send the stop command
@@ -93,7 +93,7 @@ class towerComm:
         return
 
     # move the tower clockwise by a certain increment
-    def CW(self, increment):
+    def CW(self, incriment):
         message = "JogF"
         if(incriment < 10):
             message += "0" + str(incriment)
@@ -104,7 +104,7 @@ class towerComm:
         return
 
     # move the tower counter clockwise by a certain increment
-    def CCW(self, increment):
+    def CCW(self, incriment):
         message = "JogR"
         if(incriment < 10):
             message += "0" + str(incriment)
