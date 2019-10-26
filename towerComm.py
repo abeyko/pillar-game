@@ -22,6 +22,14 @@ class towerComm:
             three_str = "0" + str(num)
         return three_str
 
+    def two_digit_str(self, num):
+        two_str = ''
+        if (num < 10):
+            three_str = "00" + str(num)
+        elif (num < 100):
+            three_str = "0" + str(num)
+        return two_str
+    
     # output format "ppp,rrr,ggg,bbb"
     def pos_color_str(self, position, color):
         pos = three_digit_str(position)
@@ -35,11 +43,7 @@ class towerComm:
     # the color variable is a tuple like this: (r, g, b)
     def lowerBandLight(self, position, color):
         string = "Lx"
-        string += self.three_digit_str(position)
-
-        for i in range(0, 2):
-            string += self.three_digit_str(color[i])
-
+        string += pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
         return
@@ -49,10 +53,7 @@ class towerComm:
     def middleBandLight(self, position, color):
         string = "Mx"
         string += self.three_digit_str(position)
-
-        for i in range(0, 2):
-            string += self.three_digit_str(color[i])
-
+        string += pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
         return
@@ -62,10 +63,7 @@ class towerComm:
     def upperBandLight(self, position, color):
         string = "Hx"
         string += self.three_digit_str(position)
-
-        for i in range(0, 2):
-            string += self.three_digit_str(color[i])
-
+        string += pos_color_str(position, color)
         string += "\n"
         self.ser.write(string.encode())
         return
@@ -80,35 +78,27 @@ class towerComm:
         message = "GoTo"
         if(position > 96):
             position -= 96
-        if (position < 0):
+        elif (position < 0):
             position += 96
-        if(position < 10):
-            message += "00" + position
-        else:
-            message += "0" + position
-
+        
+        message += two_digit_str(position)
         message += "\n"
         self.ser.write(message.encode())
         return
 
     # move the tower clockwise by a certain increment
-    def CW(self, incriment):
+    def CW(self, increment):
         message = "JogF"
-        if(incriment < 10):
-            message += "0" + incriment
-        else:
-            message += incriment
+        message += three_digit_str(position)
+        message = two_digit_str(position)
         message += "\n"
         self.ser.write(message.encode())
         return
 
     # move the tower counter clockwise by a certain increment
-    def CCW(self, incriment):
+    def CCW(self, increment):
         message = "JogR"
-        if(incriment < 10):
-            message += "0" + incriment
-        else:
-            message += incriment
+        message += two_digit_str(increment)
         message += "\n"
         self.ser.write(message.encode())
         return
