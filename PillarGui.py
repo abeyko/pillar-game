@@ -56,10 +56,12 @@ class PillarGui:
             # and if the left mouse button was pressed.
             if Rect1.collidepoint(pos) and pressed1:
                 print("Starting up tower game")
+                return 1
             # Check if the rect collided with the mouse pos
             # and if the left mouse button was pressed.
             elif Rect2.collidepoint(pos) and pressed1:
                 print("Reseting tower game")
+                return 2
             elif event.type == pygame.QUIT:
                 running = False
         pygame.quit()
