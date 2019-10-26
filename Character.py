@@ -32,7 +32,6 @@ class Character:
         # makes sure you cant move to an LED over 300
         if(self.position[0] < 299):
             self.updateTower((0, 0, 0))  # blank the previous LED
-            self.calcStepPosition()
             self.position[0] += 1
             self.calcStepPosition()
             self.updateTower(self.color)
@@ -45,7 +44,6 @@ class Character:
         # makes sure you cant move to an LED under 0
         if(self.position[0] > 0):
             self.updateTower((0, 0, 0))  # blank the previous LED
-            self.calcStepPosition()
             self.position[0] -= 1
             self.calcStepPosition()
             self.updateTower(self.color)
@@ -107,6 +105,12 @@ class Character:
                 if self.isInvincibleTicks == 0:
                     self.lives -= 1
                     self.isInvincibleTicks = 15 # makes the player invincible for 15 frames
+            elif enemies[i].position[0] == self.position[0] and enemies[i].position == -1:
+                # checks to see if the player is currently invincible
+                if self.isInvincibleTicks == 0:
+                    self.lives -= 1
+                    self.isInvincibleTicks = 15  # makes the player invincible for 15 frames
+
         return
 
     def collissionAnimation(self):
