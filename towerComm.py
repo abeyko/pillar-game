@@ -1,9 +1,8 @@
 import serial
-import pygame
 class towerComm:
 
     def __init__(self):
-        ser = serial.Serial('/dev/ttyACM0', 115200)
+        self.ser = serial.Serial('/dev/ttyACM0', 115200)
         return
 
     # send anything you want
@@ -24,10 +23,10 @@ class towerComm:
 
     # output format "ppp,rrr,ggg,bbb"
     def pos_color_str(self, position, color):
-        pos = three_digit_str(position)
-        r = three_digit_str(color.r)
-        g = three_digit_str(color.g)
-        b = three_digit_str(color.b)
+        pos = self.three_digit_str(position)
+        r = self.three_digit_str(color.r)
+        g = self.three_digit_str(color.g)
+        b = self.three_digit_str(color.b)
         num_str = pos + ',' + r + ',' + g + ',' + b
         return color
     

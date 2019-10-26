@@ -1,8 +1,11 @@
 class Character:
     position = [0, 0] # LED number and LED row
-    color = [255, 255, 255]
+    color = [255, 255, 255] # main color of the player
+    color2 = [255, 255, 255] # second color that's used during animations
     stepRatio = 96/23 # the ratio of motor steps to LED changes
     stepAngle = 0 # the angle of the stepper motor
+    lives = 3
+    isInvincibleTicks = 0
 
     # 4 steps counter clockwise = one LED to the right
     # 23 LEDs and 96 steps clockwise = one revolution
@@ -74,3 +77,28 @@ class Character:
         else:
             self.comm.UpperBandLight(self.position[0], color)
         return
+
+    #give it an array of all the enemies currently on the screen to detect collissions
+    def hasCollided(self, enemies):
+
+        #incriments the amount of invicibility the player has down by one
+        if self.isInvincibleTicks > 0:
+            self.isInvincibleTicks -= 1
+            self.collissionAnimation()
+
+        for i in range(0, len(enemies)):
+            # checks to see if the player and the enemy collided
+            if enemies[i].position[0] == self.position[0] and enemies[i].position[1] == self.position[1]:
+                # checks to see if the player is currently invincible
+                if self.isInvincibleTicks == 0:
+                    self.lives -= 1
+                    self.isInvincibleTicks = 15 # makes the player invincible for 15 frames
+        return
+
+    def collissionAnimation(self):
+        if self.isInvincibleTicks % 2 == 0: # checks to see if it's even
+            self.color = self.color2
+        else:
+            self.color = [0, 0, 0]
+        return
+
