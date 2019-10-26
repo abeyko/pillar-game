@@ -3,19 +3,24 @@ import random
 class FallingRocks:
     position = [0, 2]
     color = [154, 146, 96]
-    def __init__(self, comm):
+    previous_time = 0
+    def __init__(self, comm, timer):
         self.position [0] = random.randint(276, 299)
         self.comm = comm
+        self.timer = timer
         return
 
-    def updatePosition(self):
-        self.drawRock([0, 0, 0])
-        if self.position[1] == 0:
-            self.moveDown()
-            self.position[1] = 2
-        else:
-            self.position[1] -= 1
-        self.drawRock(self.color)
+    def updatePosition(self, timer):
+        if (timer - self.previous_time > 0.5):
+            self.previous_time = timer
+            self.drawRock([0, 0, 0])
+            if self.position[1] == 0:
+                self.moveDown()
+                self.position[1] = 2
+                self.drawRock()
+            else:
+                self.position[1] -= 1
+                self.drawRock(self.color)
         return
 
     def moveDown(self):
