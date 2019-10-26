@@ -39,11 +39,14 @@ def loop():
         spawner.randomSpawn(time)
 
         if (Player.HasWon == 1):
+            print("Won")
             comm.sendAnything("Murica")
-
+            time.sleep(2)
+            done = True
         if (Player.HasLos == 1):
             comm.sendAnything("RED")
-
+            time.sleep(2)
+            done = True
         draw()
         clock.tick(5)
 
