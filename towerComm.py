@@ -1,8 +1,12 @@
 import serial
 class towerComm:
-
+    #PORT = '/dev/ttyACM0'
+    PORT = 'COM6'
     def __init__(self):
-        self.ser = serial.Serial('/dev/ttyACM0', 115200)
+        try:
+            self.ser = serial.Serial(self.PORT, 115200)
+        except:
+            print("No Connection")
         return
 
     # send anything you want
@@ -82,9 +86,9 @@ class towerComm:
         if (position < 0):
             position += 96
         if(position < 10):
-            message += "00" + position
+            message += "00" + str(position)
         else:
-            message += "0" + position
+            message += "0" + str(position)
 
         message += "\n"
         self.ser.write(message.encode())
@@ -94,9 +98,9 @@ class towerComm:
     def CW(self, incriment):
         message = "JogF"
         if(incriment < 10):
-            message += "0" + incriment
+            message += "0" + str(incriment)
         else:
-            message += incriment
+            message += str(incriment)
         message += "\n"
         self.ser.write(message.encode())
         return
@@ -105,9 +109,9 @@ class towerComm:
     def CCW(self, incriment):
         message = "JogR"
         if(incriment < 10):
-            message += "0" + incriment
+            message += "0" + str(incriment)
         else:
-            message += incriment
+            message += str(incriment)
         message += "\n"
         self.ser.write(message.encode())
         return

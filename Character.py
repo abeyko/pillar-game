@@ -15,6 +15,18 @@ class Character:
         self.comm = commClass
         return
 
+    def updatePosition(self, axis0, axis1):
+        if(axis0 > 0.5):
+            self.moveRight()
+        if (axis0 < -0.5):
+            self.moveLeft()
+        if (axis1 < -0.5):
+            self.moveUp()
+        if (axis1 > 0.5):
+            self.moveDown()
+        print(self.position)
+        return
+
     # move the character to the right one led
     def moveRight(self):
         # makes sure you cant move to an LED over 300
@@ -32,7 +44,7 @@ class Character:
         if(self.position[0] > 0):
             self.updateTower((0, 0, 0))  # blank the previous LED
             self.calcStepPosition()
-            self.position[0] += 1
+            self.position[0] -= 1
             self.calcStepPosition()
             self.updateTower(self.color)
         return
@@ -49,9 +61,9 @@ class Character:
     # move the character down one row
     def moveDown(self):
         # makes sure you cant move to a row under 0
-        if (self.position[1] < 0):
+        if (self.position[1] > 0):
             self.updateTower((0, 0, 0))  # blank the previous LED
-            self.position[1] += 1
+            self.position[1] -= 1
             self.updateTower(self.color)
 
         return
@@ -75,7 +87,7 @@ class Character:
         elif (self.position[1] == 1):
             self.comm.middleBandLight(self.position[0], color)
         else:
-            self.comm.UpperBandLight(self.position[0], color)
+            self.comm.upperBandLight(self.position[0], color)
         return
 
     #give it an array of all the enemies currently on the screen to detect collissions
