@@ -10,6 +10,26 @@ class towerComm:
         message += "\n"
         self.ser.write(message.encode())
 
+    # convert <3 digit ints to 3 digit string
+    def three_digit_str(self, num):
+        three_str = ''
+        if (num > 99):
+            three_str = str(num)
+        elif (num < 10):
+            three_str = "00" + str(num)
+        elif (num < 100):
+            three_str = "0" + str(num)
+        return three_str
+
+    # output format "ppp,rrr,ggg,bbb"
+    def pos_color_str(self, position, color):
+        pos = three_digit_str(position)
+        r = three_digit_str(color.r)
+        g = three_digit_str(color.g)
+        b = three_digit_str(color.b)
+        num_str = pos + ',' + r + ',' + g + ',' + b
+        return color
+    
     # tells the tower to light up a certain led with a certain color in the lower band
     # the color variable is a tuple like this: (r, g, b)
     def lowerBandLight(self, position, color):
@@ -75,6 +95,31 @@ class towerComm:
             elif (color[i] > 100):
                 string += color[i]
 
+        string += "\n"
+        self.ser.write(string.encode())
+        return# tells the tower to light up a certain led with a certain color in the lower band
+    # the color variable is a tuple like this: (r, g, b)
+    def lowerBandLight(self, position, color):
+        string = "Lx"
+        string += pos_color_str(self, position, color)
+        string += "\n"
+        self.ser.write(string.encode())
+        return
+
+    # tells the tower to light up a certain led with a certain color in the lower band
+    # the color variable is a tuple like this: (r, g, b)
+    def middleBandLight(self, position, color):
+        string = "Mx"
+        string += pos_color_str(self, position, color)
+        string += "\n"
+        self.ser.write(string.encode())
+        return
+
+    # tells the tower to light up a certain led with a certain color in the lower band
+    # the color variable is a tuple like this: (r, g, b)
+    def upperBandLight(self, position, color):
+        string = "Hx"
+        string += pos_color_str(self, position, color)
         string += "\n"
         self.ser.write(string.encode())
         return
