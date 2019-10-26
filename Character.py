@@ -36,6 +36,8 @@ class Character:
             self.position[0] += 1
             self.calcStepPosition()
             self.updateTower(self.color)
+        elif(self.position[0] == 299):
+            self.comm.sendAnything("Murica")
         return
 
     # move the character to the left one LED
