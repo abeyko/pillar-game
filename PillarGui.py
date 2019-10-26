@@ -2,16 +2,6 @@ import pygame
 import sys
 from pygame.locals import *
 
-white = (255,255,255)
-black = (0,0,0)
-
-running = True
-
-window = pygame.display.set_mode((600,400), 0, 32)
-
-Rect1 = pygame.draw.rect(window, (black), (175, 75, 200, 100), 2)
-Rect2 = pygame.draw.rect(window, (black), (175, 275, 200, 100), 2)
-
 class Pane(object):
     def __init__(self):
         pygame.init()
@@ -37,16 +27,26 @@ class Pane(object):
         self.screen.blit(self.font.render('Reset', True, (255,0,0)), (240, 310))
         pygame.display.update()
 
-if __name__ == '__main__':
-    Pan3 = Pane()
-    
-    Pan3.addRect()
-    Pan3.addText()
-    
-    Pan3.addSecondRect()
-    Pan3.addSecondText()
-    
-    while running:
+class TowerGUI:   
+    white = (255,255,255)
+    black = (0,0,0)
+
+    running = True
+
+    window = pygame.display.set_mode((600,400), 0, 32)
+
+    Rect1 = pygame.draw.rect(window, (black), (175, 75, 200, 100), 2)
+    Rect2 = pygame.draw.rect(window, (black), (175, 275, 200, 100), 2)
+    def initGUI():
+        pane = Pane()
+        
+        pane.addRect()
+        pane.addText()
+        
+        pane.addSecondRect()
+        pane.addSecondText()
+        
+    def drawGUI():        
         # Mouse position and button clicking.
         pos = pygame.mouse.get_pos()
         pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
@@ -55,11 +55,11 @@ if __name__ == '__main__':
             # Check if the rect collided with the mouse pos
             # and if the left mouse button was pressed.
             if Rect1.collidepoint(pos) and pressed1:
-                print("You clicked Start")
+                print("Starting up tower game")
             # Check if the rect collided with the mouse pos
             # and if the left mouse button was pressed.
             elif Rect2.collidepoint(pos) and pressed1:
-                print("You clicked Reset")
+                print("Reseting tower game")
             elif event.type == pygame.QUIT:
                 running = False
-    pygame.quit()
+        pygame.quit()
