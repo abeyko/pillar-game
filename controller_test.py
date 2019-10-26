@@ -70,11 +70,11 @@ textPrint = TextPrint()
 ser = serial.Serial('/dev/ttyACM0', 9600)
 flag = 1
 location = '000'
-number = 0
+number = 0 
 updt_loc = False
 color_index = 0
 updt_color = False
-player = 0
+player = 0 #player position
 prev_player = 0
 move = False
 reset = True
@@ -154,6 +154,8 @@ while not done:
 
         textPrint.unindent()
 
+
+
     #
     # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
     #
@@ -169,7 +171,7 @@ while not done:
             updt_color = False
             
         if move:
-            if player < 100:
+            if player < 300: #300 total LEDs to go up to
                 prev_player = player
                 player += 1
             move = False
