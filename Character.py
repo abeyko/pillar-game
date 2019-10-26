@@ -14,19 +14,21 @@ class Character:
 
     # move the character to the right one led
     def moveRight(self):
-        self.updateTower((0,0,0)) # blank the previous LED
         # makes sure you cant move to an LED over 300
         if(self.position[0] < 299):
+            self.updateTower((0, 0, 0))  # blank the previous LED
+            self.calcStepPosition()
             self.position[0] += 1
             self.calcStepPosition()
             self.updateTower(self.color)
         return
 
-    # move the character to the left one led
+    # move the character to the left one LED
     def moveLeft(self):
-        self.updateTower((0, 0, 0)) # blank the previous LED
         # makes sure you cant move to an LED under 0
         if(self.position[0] > 0):
+            self.updateTower((0, 0, 0))  # blank the previous LED
+            self.calcStepPosition()
             self.position[0] += 1
             self.calcStepPosition()
             self.updateTower(self.color)
@@ -34,19 +36,18 @@ class Character:
 
     # move the character up one row
     def moveUp(self):
-        self.updateTower((0, 0, 0)) # blank the previous LED
         # makes sure you cant move to a row above 2
         if(self.position[1] < 2):
+            self.updateTower((0, 0, 0))  # blank the previous LED
             self.position[1] += 1
             self.updateTower(self.color)
         return
 
     # move the character down one row
     def moveDown(self):
-        self.updateTower((0, 0, 0)) # blank the previous LED
-
         # makes sure you cant move to a row under 0
         if (self.position[1] < 0):
+            self.updateTower((0, 0, 0))  # blank the previous LED
             self.position[1] += 1
             self.updateTower(self.color)
 
