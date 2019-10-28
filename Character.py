@@ -1,5 +1,5 @@
 class Character:
-    position = [0, 0] # LED number and LED row
+    position = [150, 0] # LED number and LED row
     color = [255, 255, 255] # main color of the player
     color2 = [255, 255, 255] # second color that's used during animations
     stepRatio = 96/23 # the ratio of motor steps to LED changes

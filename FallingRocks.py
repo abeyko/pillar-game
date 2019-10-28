@@ -1,4 +1,5 @@
 import random
+from time import sleep
 
 class FallingRocks:
     position = [0, 2]
@@ -11,13 +12,14 @@ class FallingRocks:
         return
 
     def updatePosition(self, timer):
+        sleep(0.1)
         if (timer - self.previous_time > 0.5):
             self.previous_time = timer
             self.drawRock([0, 0, 0])
             if self.position[1] == 0:
                 self.moveDown()
                 self.position[1] = 2
-                self.drawRock()
+                self.drawRock(self.color)
             else:
                 self.position[1] -= 1
                 self.drawRock(self.color)

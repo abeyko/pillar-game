@@ -5,7 +5,7 @@ class Lava:
     # front end position of lava
     # know time
     led_number = 1
-    position = [0 -1] # LED number and LED row
+    position = [150 -1] # LED number and LED row
     previous_time = 0
     increment_time = 3000
     
@@ -17,7 +17,7 @@ class Lava:
     
     def updatePosition(self, timer):
         if (timer - self.previous_time > self.increment_time):
-            self.increment_time *= 0.9
+            self.increment_time *= 0.8
             self.previous_time = timer
             self.position[0] += 1
             self.draw()
@@ -26,12 +26,13 @@ class Lava:
         return
 
     def draw(self):
+        sleep(0.05)
         color = [randint(249, 255), randint(54, 154), randint(14, 34)]
         self.comm.lowerBandLight(self.position[0], color)
-        sleep(0.1)
+        sleep(0.15)
         color = [randint(249, 255), randint(54, 154), randint(14, 34)]
         self.comm.middleBandLight(self.position[0], color)
-        sleep(0.1)
+        sleep(0.15)
         color = [randint(249, 255), randint(54, 154), randint(14, 34)]
         self.comm.upperBandLight(self.position[0], color)
 

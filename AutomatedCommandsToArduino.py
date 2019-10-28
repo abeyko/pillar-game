@@ -9,6 +9,7 @@ longTime = 30
         
 def main():
     print("Begin.")
+    # Flag is true while the arduino is sending its response over serial
     flag = True
     trueCounter = 0
     ser = serial.Serial('/dev/ttyACM0', 9600)

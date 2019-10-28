@@ -2,6 +2,7 @@ import pygame
 import towerComm
 import Character
 import EnemySpawner
+from time import sleep
 
 BLACK = pygame.Color('black')
 WHITE = pygame.Color('white')
@@ -16,8 +17,9 @@ pygame.display.set_caption("Volcano of Doom")
 clock = pygame.time.Clock()
 pygame.joystick.init()
 Player = Character.Character(comm)
+time = pygame.time.get_ticks()
 
-spawner = EnemySpawner.EnemySpawner()
+spawner = EnemySpawner.EnemySpawner(comm, time)
 
 def loop():
     done = False
@@ -36,19 +38,22 @@ def loop():
         axis1 = joystick.get_axis(1)
         Player.updatePosition(axis0, axis1)
 
-        spawner.randomSpawn(time)
+        #spawner.randomSpawn(time)
+        for enemy in spawner.enemies:
+            enemy.updatePosition(time)
 
         if (Player.HasWon == 1):
             print("Won")
+            sleep(2)
             comm.sendAnything("Murica")
-            time.sleep(2)
+            sleep(2)
             done = True
         if (Player.HasLos == 1):
             comm.sendAnything("RED")
-            time.sleep(2)
+            sleep(2)
             done = True
         draw()
-        clock.tick(5)
+        clock.tick(7)
 
 
 def draw():

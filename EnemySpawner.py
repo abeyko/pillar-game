@@ -31,7 +31,7 @@ class EnemySpawner:
     def randomSpawn(self, timer):
         mob = random.randint(0, 2)
         time = timer-self.time
-        if(time > 4000):
+        if(time > 5000):
             self.timer = timer
             if mob == 0:
                 self.spawnRocks()
